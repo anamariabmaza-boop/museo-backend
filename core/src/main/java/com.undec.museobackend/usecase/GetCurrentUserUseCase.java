@@ -4,6 +4,7 @@ import com.undec.museobackend.exception.UserNotFoundException;
 import com.undec.museobackend.model.User;
 import com.undec.museobackend.output.GetCurrentUserPort;
 import com.undec.museobackend.output.UserRepositoryPort;
+import com.undec.museobackend.valueobjects.Email;
 import com.undec.museobackend.valueobjects.UserId;
 
 import java.util.UUID;
@@ -17,11 +18,9 @@ public class GetCurrentUserUseCase implements GetCurrentUserPort {
     }
 
     @Override
-    public Result execute(String userId) {
-        UserId id = UserId.of(UUID.fromString(userId));
-
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+    public Result execute(String email) {
+        User user = userRepository.findByEmail(Email.of(email))
+                .orElseThrow(() -> new UserNotFoundException(email));
 
         return new Result(
                 user.getId().getValue().toString(),

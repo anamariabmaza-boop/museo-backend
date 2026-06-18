@@ -1,5 +1,5 @@
 package com.undec.museobackend.output;
 
 public interface LogoutUserPort {
-    void execute(String userId);
+    void execute(String email);
 }

@@ -35,8 +35,10 @@ public class BeanConfig {
     }
 
     @Bean
-    public LogoutUserUseCase logoutUserUseCase(RefreshTokenRepositoryPort refreshTokenRepository) {
-        return new LogoutUserUseCase(refreshTokenRepository);
+    public LogoutUserUseCase logoutUserUseCase(
+            RefreshTokenRepositoryPort refreshTokenRepository,
+            UserRepositoryPort userRepository) {
+        return new LogoutUserUseCase(refreshTokenRepository, userRepository);
     }
 
     @Bean
